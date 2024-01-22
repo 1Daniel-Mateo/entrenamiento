@@ -20,8 +20,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text("descripcion");
-            $table->text("categoria")->nullable();
-            $table->integer("curso")->unique();
+            $table->text("categoria");
+
             $table->timestamps();
         });
         // php artisan migrate:fresh = recorrera todas las tablas y las volvera a migrar, ya con sus cambios
