@@ -20,11 +20,35 @@ class CursoController extends Controller
     public function create(){
         return view("cursos.create");
     }
-    //metodo show
-    public function show($id){
 
-        $curso = Curso::find($id);
-        //compact(curso) ayuda a mandar variables a la vista y hace la misma tarea de este arreglo ["curso"=>$curso]
+    public function registro(Request $req){
+        $registro = new Curso();
+
+        $registro->name = $req->name;
+        $registro->descripcion = $req->descripcion;
+        $registro->categoria = $req->categoria;
+
+        $registro->save();
+        
+        return redirect()->route('curso-especifico', $registro->id)->with("success","registrado");
+    }
+    //metodo show
+    public function show(Curso $curso){
+         //compact(curso) ayuda a mandar variables a la vista y hace la misma tarea de este arreglo ["curso"=>$curso]
         return view("cursos.show",compact("curso"));
+    }
+
+    public function editar(Curso $curso){
+        //compact(curso) ayuda a mandar variables a la vista y hace la misma tarea de este arreglo ["curso"=>$curso]
+        return view("cursos.editar",compact("curso"));
+    }
+
+    public function actualizar(Request $req,Curso $curso){
+        $curso->name = $req->name;
+        $curso->descripcion = $req->descripcion;
+        $curso->categoria = $req->categoria;
+
+        $curso->save();
+        return redirect()->route("curso-especifico", $curso)->with("success","actualizado");
     }
 }

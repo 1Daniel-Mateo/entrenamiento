@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CursoController;
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('principal');
 
 /*
 Aqui se definen un grupo de rutas, 
@@ -15,20 +15,13 @@ Route::controller(CursoController::class)->group(function () {
     //le asignas un nombre para que te enrute a la vista que deseas
     Route::get('cursos', 'index')->name('home');
     Route::get('cursos/crear', 'create')->name('crear-curso');
-    Route::get('cursos/{id}', 'show')->name('curso-especifico');
+    //Ruta que envia los datos al registro, ruta tipo POST
+    Route::post('registrado', 'registro')->name('agregar');
+
+    Route::get('cursos/{curso}', 'show')->name('curso-especifico');
+    Route::get('actualizar/{curso}/modificar', 'editar')->name('modificar');
+    Route::put('modificado/{curso}', 'actualizar')->name('cambio');
+
 });
 
 
-
-
-
-// Route::get('curso/{curso}/{categoria?}', function ($curso,$categoria = null) {
-
-//     if ($categoria) {
-//         return "binevenido al curso $curso, de la categoria $categoria";
-//     } else {
-//         return "binevenido al curso $curso";
-//     }
-    
-    
-// });

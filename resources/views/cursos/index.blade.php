@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Bienvenidos a cursos</h1>
+    <a href="{{ route('principal') }}">Dash de laravel</a><br>
     <a href="{{ route('crear-curso') }}">Añadir curso</a><br>
       {{-- metodo que me imprime los datos --}}
         @foreach ($cursos as $curso)
