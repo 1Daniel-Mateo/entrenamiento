@@ -12,9 +12,10 @@ para facilitar el llamdo del buscador y
    que estan almacenadas en una funcion anonima
 */
 Route::controller(CursoController::class)->group(function () {
-    Route::get('cursos', 'index');
-    Route::get('cursos/crear', 'create');
-    Route::get('cursos/{curso}', 'show');
+    //le asignas un nombre para que te enrute a la vista que deseas
+    Route::get('cursos', 'index')->name('home');
+    Route::get('cursos/crear', 'create')->name('crear-curso');
+    Route::get('cursos/{id}', 'show')->name('curso-especifico');
 });
 
 

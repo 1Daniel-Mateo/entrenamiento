@@ -47,11 +47,16 @@ class User extends Authenticatable
     ];
 
     //metodo que se encarga de convertir los nombres de mayusculas a minusculas
-    protected function name(): Attribute {
+    protected function name(): Attribute
+    {
         return new Attribute(
-            set: function($valor) {
-                return strtolower($valor);  
-            }
+            //ahora dentro de esta funcion retornaremos el metodo get y set los que se guardaran en una funcion flecha
+            //Get para que el valor que me tome lo convierta el primer caracter en mayuscula
+            get: fn($valor) => ucwords($valor),
+            //set para decirle que el valor de letra me lo convierta en minuscula
+            set: fn($valor) => strtolower($valor)
         );
     }
+
+    
 }
