@@ -22,6 +22,14 @@ class CursoController extends Controller
     }
 
     public function registro(Request $req){
+
+        //Validacion de que los campos son requeridos
+        $req ->validate([
+            'name' => ['required','string','min:5','max:20'],
+            'descripcion'=> ['required'],
+            'categoria'=> ['required','string','min:5','max:20'],
+        ]);
+
         $registro = new Curso();
 
         $registro->name = $req->name;
@@ -44,6 +52,13 @@ class CursoController extends Controller
     }
 
     public function actualizar(Request $req,Curso $curso){
+        //Validacion de que los campos son requeridos
+        $req ->validate([
+            'name' => ['required','string','min:5','max:20'],
+            'descripcion'=> ['required'],
+            'categoria'=> ['required','string','min:5','max:20'],
+        ]);
+        
         $curso->name = $req->name;
         $curso->descripcion = $req->descripcion;
         $curso->categoria = $req->categoria;
