@@ -5,7 +5,7 @@
 @section('content')
     <h1>Bienvenido a crear curso</h1>
     
-    <form action="{{ route('agregar') }}" method="POST">
+    <form action="{{ route('cursos.store') }}" method="POST">
 
         @csrf
 

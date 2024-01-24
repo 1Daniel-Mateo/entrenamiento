@@ -5,7 +5,7 @@
 @section('content')
     <h1>Bienvenido a editar</h1>
     
-    <form action="{{ route('cambio',$curso) }}" method="POST">
+    <form action="{{ route('cursos.update',$curso) }}" method="POST">
 
         @csrf
 

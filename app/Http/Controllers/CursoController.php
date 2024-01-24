@@ -22,7 +22,7 @@ class CursoController extends Controller
         return view("cursos.create");
     }
 
-    public function registro(StoreCurso $req){
+    public function store(StoreCurso $req){
         
         // $registro = new Curso();
 
@@ -36,7 +36,7 @@ class CursoController extends Controller
         //Esta propiedad se le llama asignacion masiva
         $registro = Curso::create($req->all());
         
-        return redirect()->route('curso-especifico', $registro);
+        return redirect()->route('cursos.show', $registro);
     }
     //metodo show
     public function show(Curso $curso){
@@ -44,12 +44,12 @@ class CursoController extends Controller
         return view("cursos.show",compact("curso"));
     }
 
-    public function editar(Curso $curso){
+    public function edit(Curso $curso){
         //compact(curso) ayuda a mandar variables a la vista y hace la misma tarea de este arreglo ["curso"=>$curso]
-        return view("cursos.editar",compact("curso"));
+        return view("cursos.editar", compact("curso"));
     }
 
-    public function actualizar(StoreCurso $req,Curso $curso){
+    public function update(StoreCurso $req,Curso $curso){
        
         // $curso->name = $req->name;
         // $curso->descripcion = $req->descripcion;
@@ -59,11 +59,11 @@ class CursoController extends Controller
 
         $curso->update($req->all());
         
-        return redirect()->route("curso-especifico", $curso)->with("success","actualizado");
+        return redirect()->route("cursos.show", $curso)->with("success","actualizado");
     }
 
-    public function eliminar(Curso $curso){
+    public function destroy(Curso $curso){
         $curso->delete();
-        return redirect()->route("home", $curso);
+        return redirect()->route("cursos.index", $curso);
     }
 }
