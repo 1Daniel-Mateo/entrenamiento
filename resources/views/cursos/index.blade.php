@@ -10,6 +10,11 @@
         @foreach ($cursos as $curso)
             <li>{{ $curso->name}}</li>
             <a href="{{ route('curso-especifico', $curso->id) }}">entrar a curso</a>
+            <form action="{{ route('eliminado', $curso) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit">Eliminar Curso</button>
+            </form>
         @endforeach
 
     {{-- boton para navegar entre la lista de datos por secciones --}}

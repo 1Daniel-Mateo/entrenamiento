@@ -61,4 +61,9 @@ class CursoController extends Controller
         
         return redirect()->route("curso-especifico", $curso)->with("success","actualizado");
     }
+
+    public function eliminar(Curso $curso){
+        $curso->delete();
+        return redirect()->route("home", $curso);
+    }
 }

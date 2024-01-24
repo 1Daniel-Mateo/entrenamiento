@@ -21,6 +21,7 @@ Route::controller(CursoController::class)->group(function () {
     Route::get('cursos/{curso}', 'show')->name('curso-especifico');
     Route::get('actualizar/{curso}/modificar', 'editar')->name('modificar');
     Route::put('modificado/{curso}', 'actualizar')->name('cambio');
+    Route::delete('borrado/{curso}', 'eliminar')->name('eliminado');
 
 });
 
