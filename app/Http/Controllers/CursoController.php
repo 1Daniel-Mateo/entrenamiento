@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCurso;
 use App\Models\Curso;
 use Illuminate\Http\Request;
 
@@ -21,24 +22,21 @@ class CursoController extends Controller
         return view("cursos.create");
     }
 
-    public function registro(Request $req){
-
-        //Validacion de que los campos son requeridos
-        $req ->validate([
-            'name' => ['required','string','min:5','max:20'],
-            'descripcion'=> ['required'],
-            'categoria'=> ['required','string','min:5','max:20'],
-        ]);
-
-        $registro = new Curso();
-
-        $registro->name = $req->name;
-        $registro->descripcion = $req->descripcion;
-        $registro->categoria = $req->categoria;
-
-        $registro->save();
+    public function registro(StoreCurso $req){
         
-        return redirect()->route('curso-especifico', $registro->id)->with("success","registrado");
+        // $registro = new Curso();
+
+        // $registro->name = $req->name;
+        // $registro->descripcion = $req->descripcion;
+        // $registro->categoria = $req->categoria;
+
+        // $registro->save();
+
+        //metodo create le indicamos que nos cree un nuevo curso que nos incluya todo, tambien se puede hacer un array siguiendo la conveccion anterior
+        //Esta propiedad se le llama asignacion masiva
+        $registro = Curso::create($req->all());
+        
+        return redirect()->route('curso-especifico', $registro);
     }
     //metodo show
     public function show(Curso $curso){
@@ -51,19 +49,16 @@ class CursoController extends Controller
         return view("cursos.editar",compact("curso"));
     }
 
-    public function actualizar(Request $req,Curso $curso){
-        //Validacion de que los campos son requeridos
-        $req ->validate([
-            'name' => ['required','string','min:5','max:20'],
-            'descripcion'=> ['required'],
-            'categoria'=> ['required','string','min:5','max:20'],
-        ]);
-        
-        $curso->name = $req->name;
-        $curso->descripcion = $req->descripcion;
-        $curso->categoria = $req->categoria;
+    public function actualizar(StoreCurso $req,Curso $curso){
+       
+        // $curso->name = $req->name;
+        // $curso->descripcion = $req->descripcion;
+        // $curso->categoria = $req->categoria;
 
-        $curso->save();
+        // $curso->save();
+
+        $curso->update($req->all());
+        
         return redirect()->route("curso-especifico", $curso)->with("success","actualizado");
     }
 }
